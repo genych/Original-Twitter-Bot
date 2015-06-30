@@ -27,6 +27,7 @@ def tweet(statusupdate, erroremail):
 	
 	if len(statusupdate) > 140:
 		raise Exception("Status message is too long!")
+		# that's it. you'll get error message and program will be terminated. should be try-except block or (better) simple check and maybe truncating message
 		logger.error("Status message was too long!\n\nStatus:\n%s" % statusupdate)
 		sendmail(erroremail, "TWEET ERROR", "Status update for @youraccount has not been posted, update was too long.\n\nStatus:\n%s" % statusupdate)
 		
@@ -36,7 +37,7 @@ def tweet(statusupdate, erroremail):
 		logger.info("Status updated:\n\'%s\'" % statusupdate)
 		print "Status updated:\n\'%s\'" % (result.text)
 	except IOError:
-		exit()
+		exit()		# what?! no logging, no warnings, just (╯°□°）╯ ︵ ┻━┻ ? this isn't good
 	except Exception as ex:
 		logger.error("ERROR TWEET WAS NOT POSTED: "+str(ex))
 		sendmail(erroremail, "TWEET ERROR", "Status update for @youraccount has not been posted, reason given: "+str(ex))
